@@ -1,0 +1,116 @@
+body {
+  margin: 0;
+}
+a {
+  display: block;
+  text-decoration: none;
+  color: #222;
+}
+.none {
+  display: none;
+}
+
+/* nav */
+
+.navbar {
+  background: white;
+  padding: 20px 10%;
+  display: flex;
+  background-color: #eee;
+  align-items: center;
+  gap: 10px;
+}
+.navbar a {
+  margin-right: 10px;
+  text-decoration: none;
+  color: black;
+}
+.navbar span {
+  color: #222;
+}
+.logo {
+  font-weight: bold;
+}
+.loginBtn,
+.logoutBtn {
+  padding: 8px 16px 6px;
+  border: none;
+  border-radius: 2px;
+  background-color: lightgray;
+  font-size: 16px;
+  cursor: pointer;
+}
+.logoutBtn {
+  margin-left: auto;
+}
+.welcome {
+  margin: 0 auto;
+}
+.registerBtn {
+  margin-left: auto;
+}
+.dark-mode .navbar {
+  background: #222;
+}
+.dark-mode .navbar a,
+.dark-mode .navbar span {
+  color: #fff;
+}
+.modeBtn {
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* list */
+.list-bg {
+  background: rgb(249, 250, 255);
+  padding: 10px;
+}
+.list-item {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 5px;
+  box-shadow: rgb(224, 224, 224) 0px 2px 4px 0px;
+  /* 애니메이션 */
+  opacity: 1;
+  transition: all 0.2s;
+}
+.list-item h4 {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 0;
+}
+.writer {
+  color: #555;
+}
+.list-item p {
+  color: grey;
+  margin: 5px 0px;
+}
+.modify-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+/* Write */
+.p-20 {
+  padding: 20px;
+}
+input {
+  box-sizing: border-box;
+  padding: 10px;
+  display: block;
+  margin-bottom: 10px;
+}
+button[type='submit'] {
+  padding: 10px 15px;
+  background: lightgray;
+  border: none;
+  border-radius: 5px;
+}
+
+/* detail */
+.comment-box {
+  display: flex;
+}
