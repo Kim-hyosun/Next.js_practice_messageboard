@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/util/auth';
-import { connectDB, DB_NAME } from '@/util/database';
+import { getDb } from '@/util/database';
 import { postCreateSchema } from '@/util/schemas';
 import {
   errorResponse,
@@ -28,15 +28,15 @@ export async function POST(req: NextRequest) {
 
     const parsed = postCreateSchema.safeParse(raw);
     if (!parsed.success) return zodErrorResponse(parsed.error);
-    const { title, content, imgUrl } = parsed.data;
+    const { title, content, imgKey } = parsed.data;
 
-    const db = (await connectDB).db(DB_NAME);
+    const db = await getDb();
     await db.collection('post').insertOne({
       title,
       content,
       user: session.user.email,
       username: session.user.name ?? '',
-      imgUrl: imgUrl ?? '',
+      imgKey: imgKey ?? '',
     });
 
     if (!contentType.includes('application/json')) {
@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
 // 게시글 목록
 export async function GET() {
   try {
-    const db = (await connectDB).db(DB_NAME);
+    const db = await getDb();
     const result = await db.collection('post').find().toArray();
     return NextResponse.json(
       result.map((p) => ({ ...p, _id: p._id.toString() }))

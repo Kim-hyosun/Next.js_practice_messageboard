@@ -1,116 +1,86 @@
-body {
-  margin: 0;
-}
-a {
-  display: block;
-  text-decoration: none;
-  color: #222;
-}
-.none {
-  display: none;
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
 }
 
-/* nav */
-
-.navbar {
-  background: white;
-  padding: 20px 10%;
-  display: flex;
-  background-color: #eee;
-  align-items: center;
-  gap: 10px;
-}
-.navbar a {
-  margin-right: 10px;
-  text-decoration: none;
-  color: black;
-}
-.navbar span {
-  color: #222;
-}
-.logo {
-  font-weight: bold;
-}
-.loginBtn,
-.logoutBtn {
-  padding: 8px 16px 6px;
-  border: none;
-  border-radius: 2px;
-  background-color: lightgray;
-  font-size: 16px;
-  cursor: pointer;
-}
-.logoutBtn {
-  margin-left: auto;
-}
-.welcome {
-  margin: 0 auto;
-}
-.registerBtn {
-  margin-left: auto;
-}
-.dark-mode .navbar {
-  background: #222;
-}
-.dark-mode .navbar a,
-.dark-mode .navbar span {
-  color: #fff;
-}
-.modeBtn {
-  font-size: 26px;
-  cursor: pointer;
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
 }
 
-/* list */
-.list-bg {
-  background: rgb(249, 250, 255);
-  padding: 10px;
-}
-.list-item {
-  background: white;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 5px;
-  box-shadow: rgb(224, 224, 224) 0px 2px 4px 0px;
-  /* 애니메이션 */
-  opacity: 1;
-  transition: all 0.2s;
-}
-.list-item h4 {
-  font-size: 20px;
-  font-weight: 800;
-  margin: 0;
-}
-.writer {
-  color: #555;
-}
-.list-item p {
-  color: grey;
-  margin: 5px 0px;
-}
-.modify-buttons {
-  display: flex;
-  gap: 8px;
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* Write */
-.p-20 {
-  padding: 20px;
-}
-input {
-  box-sizing: border-box;
-  padding: 10px;
-  display: block;
-  margin-bottom: 10px;
-}
-button[type='submit'] {
-  padding: 10px 15px;
-  background: lightgray;
-  border: none;
-  border-radius: 5px;
-}
-
-/* detail */
-.comment-box {
-  display: flex;
+@layer base {
+  * {
+    border-color: var(--border);
+    outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
 }

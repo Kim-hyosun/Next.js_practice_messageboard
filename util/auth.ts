@@ -3,7 +3,7 @@ import GithubProvider from 'next-auth/providers/github';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
 import bcrypt from 'bcrypt';
-import { connectDB, DB_NAME } from '@/util/database';
+import { getClient, getDb } from '@/util/database';
 import type { UserCred } from '@/util/types';
 
 const githubAuthId = process.env.githubAuthId;
@@ -30,7 +30,7 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
-        const db = (await connectDB).db(DB_NAME);
+        const db = await getDb();
         const user = await db
           .collection<UserCred>('user_cred')
           .findOne({ email: credentials.email });
@@ -67,5 +67,5 @@ export const authOptions: AuthOptions = {
     },
   },
   secret: authSecret,
-  adapter: MongoDBAdapter(connectDB),
+  adapter: MongoDBAdapter(getClient()),
 };

@@ -1,6 +1,6 @@
 # Next.js로 게시판만들기
 
-Next.js 14 (App Router) + TypeScript + MongoDB + NextAuth + AWS S3 학습용 게시판.
+Next.js 14 (App Router) + TypeScript + MongoDB + NextAuth + AWS S3 게시판 만들기
 
 ## Stack
 

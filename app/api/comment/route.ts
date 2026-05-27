@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { ObjectId } from 'mongodb';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/util/auth';
-import { connectDB, DB_NAME } from '@/util/database';
+import { getDb } from '@/util/database';
 import { commentCreateSchema } from '@/util/schemas';
 import {
   errorResponse,
@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
     if (!postId || !ObjectId.isValid(postId)) {
       return errorResponse('postId가 올바르지 않습니다');
     }
-    const db = (await connectDB).db(DB_NAME);
+    const db = await getDb();
     const comments = await db
       .collection('comment')
       .find({ postId: new ObjectId(postId) })
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
     }
     const postObjectId = new ObjectId(postId);
 
-    const db = (await connectDB).db(DB_NAME);
+    const db = await getDb();
     await db.collection('comment').insertOne({
       content: comment,
       user: session.user.email,

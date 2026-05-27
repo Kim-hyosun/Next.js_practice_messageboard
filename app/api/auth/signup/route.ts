@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import bcrypt from 'bcrypt';
-import { connectDB, DB_NAME } from '@/util/database';
+import { getDb } from '@/util/database';
 import { signupSchema } from '@/util/schemas';
 import {
   errorResponse,
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     if (!parsed.success) return zodErrorResponse(parsed.error);
     const { name, email, password } = parsed.data;
 
-    const db = (await connectDB).db(DB_NAME);
+    const db = await getDb();
     const existing = await db.collection('user_cred').findOne({ email });
     if (existing) {
       return errorResponse('이메일 중복으로 가입이 어렵습니다');

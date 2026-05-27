@@ -1,9 +1,10 @@
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function RegisterBtn() {
   return (
-    <Link href="/register" className="registerBtn">
-      회원가입하기
-    </Link>
+    <Button asChild size="sm">
+      <Link href="/register">회원가입</Link>
+    </Button>
   );
 }

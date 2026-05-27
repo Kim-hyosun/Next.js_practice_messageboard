@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Moon, Sun } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const ONE_YEAR = 60 * 60 * 24 * 365;
 
@@ -21,16 +23,13 @@ export default function Darkmode({
   };
 
   return (
-    <span
-      className="modeBtn"
-      role="button"
-      tabIndex={0}
+    <Button
+      variant="ghost"
+      size="icon"
       onClick={toggle}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') toggle();
-      }}
+      aria-label={mode === 'light' ? '다크 모드로 전환' : '라이트 모드로 전환'}
     >
-      {mode === 'light' ? '🌙' : '☀️'}
-    </span>
+      {mode === 'light' ? <Moon /> : <Sun />}
+    </Button>
   );
 }

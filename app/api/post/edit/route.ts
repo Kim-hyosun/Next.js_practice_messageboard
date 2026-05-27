@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { ObjectId } from 'mongodb';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/util/auth';
-import { connectDB, DB_NAME } from '@/util/database';
+import { getDb } from '@/util/database';
 import { postEditSchema } from '@/util/schemas';
 import {
   errorResponse,
@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
     }
     const objectId = new ObjectId(_id);
 
-    const db = (await connectDB).db(DB_NAME);
+    const db = await getDb();
     const post = await db.collection('post').findOne({ _id: objectId });
     if (!post) return errorResponse('게시글을 찾을 수 없습니다', 404);
     if (post.user !== session.user.email) {
